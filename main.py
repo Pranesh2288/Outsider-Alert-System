@@ -6,7 +6,7 @@ from datetime import datetime
 
 # MongoDB setup
 client = MongoClient('mongodb+srv://pranesh:UFFzS8o0Rs7DMgR9@cluster0.hc7zj.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0')
-db = client['AccessTracker']
+db = client['EntryTracker']
 collection = db['Entries']
 
 def retrieve_encodings():
