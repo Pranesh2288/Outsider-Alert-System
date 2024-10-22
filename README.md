@@ -21,13 +21,13 @@ To install this project, follow these steps:
 
 - To add face data, run:
   ```bash
-  python3 insert_data.py
+  python insert_data.py
 - To search face data, run:
   ```bash
-  python3 search_data.py
+  python search_data.py
 - To start the application, run:
   ```bash
-  python3 main.py
+  python main.py
 
 ## Features
 - Real-time Face Detection: Captures live video frames from a webcam and detects faces in real time.
