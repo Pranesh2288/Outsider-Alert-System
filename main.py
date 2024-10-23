@@ -38,9 +38,28 @@ def print_person(user_id):
         user_name = user_data['name']
         user_access = user_data['access'].lower()
         if user_access == 'admin':
-            print(f"Admin {user_name} is accessing the room.")
+            if (datetime.now() - datetime.strptime(user_data['entries'][-1],"%Y-%m-%dT%H:%M:%S.%f")).total_seconds() > 60:
+                print(f"Admin {user_name} is accessing the room.")
+                collection.update_one(
+                    {'id': user_id}, 
+                    {
+                        '$push': {
+                            'entries': datetime.now().isoformat()  # Append the current timestamp to the entries array
+                        }
+                    }
+                )
+
         elif user_access == 'student':
-            print(f"Student {user_name} is trying to access the room.")
+            if (datetime.now() - datetime.strptime(user_data['entries'][-1],"%Y-%m-%dT%H:%M:%S.%f")).total_seconds() > 60:
+                print(f"Student {user_name} is trying to access the room.")
+                collection.update_one(
+                    {'id': user_id}, 
+                    {
+                        '$push': {
+                            'entries': datetime.now().isoformat()  # Append the current timestamp to the entries array
+                        }
+                    }
+                )
     else:
         print("Unknown person detected.")
 
