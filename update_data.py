@@ -5,8 +5,8 @@ from pymongo import MongoClient
 from datetime import datetime
 
 # MongoDB setup
-client = MongoClient('mongodb+srv://pranesh:UFFzS8o0Rs7DMgR9@cluster0.hc7zj.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0')
-db = client['EntryTracker']
+client = MongoClient('mongodb://localhost:27017/')
+db = client['AccessTracker']
 collection = db['Entries']
 
 def update_user_data():

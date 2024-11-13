@@ -3,10 +3,14 @@ import face_recognition
 from pymongo import MongoClient
 import numpy as np
 from datetime import datetime
+import requests
+TOKEN = '7864945720:AAHsZaT4S-ZqBR7rYfa1Jz-Tjl6Uc8fe6X4'
+chatID = '-4571261231'
+
 
 # MongoDB setup
-client = MongoClient('mongodb+srv://pranesh:UFFzS8o0Rs7DMgR9@cluster0.hc7zj.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0')
-db = client['EntryTracker']
+client = MongoClient('mongodb://localhost:27017/')
+db = client['AccessTracker']
 collection = db['Entries']
 
 def retrieve_encodings():
@@ -39,7 +43,10 @@ def print_person(user_id):
         user_access = user_data['access'].lower()
         if user_access == 'admin':
             if (datetime.now() - datetime.strptime(user_data['entries'][-1],"%Y-%m-%dT%H:%M:%S.%f")).total_seconds() > 60:
-                print(f"Admin {user_name} is accessing the room.")
+                message1 = f"Admin {user_name} is accessing the room."
+                url = f"https://api.telegram.org/bot{TOKEN}/sendMessage?chat_id={chatID}&text={message1}"
+                requests.get(url)
+                print(message1)
                 collection.update_one(
                     {'id': user_id}, 
                     {
@@ -51,7 +58,10 @@ def print_person(user_id):
 
         elif user_access == 'student':
             if (datetime.now() - datetime.strptime(user_data['entries'][-1],"%Y-%m-%dT%H:%M:%S.%f")).total_seconds() > 60:
-                print(f"Student {user_name} is trying to access the room.")
+                message1 = f"Student {user_name} is trying to access the room."
+                url = f"https://api.telegram.org/bot{TOKEN}/sendMessage?chat_id={chatID}&text={message1}"
+                requests.get(url)
+                print(message1)
                 collection.update_one(
                     {'id': user_id}, 
                     {
