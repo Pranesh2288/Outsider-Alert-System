@@ -19,15 +19,9 @@ To install this project, follow these steps:
 
 ## Usage
 
-- To add face data, run:
-  ```bash
-  python insert_data.py
-- To search face data, run:
-  ```bash
-  python search_data.py
 - To start the application, run:
   ```bash
-  python main.py
+   streamlit run app.py
 
 ## Features
 - Real-time Face Detection: Captures live video frames from a webcam and detects faces in real time.
